@@ -17,3 +17,11 @@ def movies():
     return jsonify(MovieSchema(many=True).dump(movies_list))
 
 
+@movie_blueprint.route('/<int:movie_id>')
+def get_movie(movie_id):
+    try:
+        movie = movie_service.get_movie(movie_id)
+    except NotFound:
+        abort(404)
+
+    return jsonify(MovieSchema().dump(movie))

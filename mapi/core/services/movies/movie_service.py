@@ -10,6 +10,12 @@ class MovieService():
     def get_movies(self) -> List[Dict[AnyStr, Any]]:
         return self.movies
 
+    def get_movie(self, movie_id: int) -> Dict[AnyStr, Any]:
+        for movie in self.movies:
+            if movie['id'] == movie_id:
+                return movie
+        raise NotFound()
+
     # TODO: Use a Database
     def _init_movies_list(self):
         self.movies.append({
