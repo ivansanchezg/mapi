@@ -27,6 +27,22 @@ class MovieService():
         self.movies.append(data)
         return data
 
+    def update_movie(self, movie_id: int, data: Dict[AnyStr, Any]) -> Dict[AnyStr, Any]:
+        index = self._get_movie_index(movie_id)
+        if index is None:
+            raise NotFound()
+        
+        for key in data:
+            self.movies[index][key] = data[key]
+        
+        return self.movies[index]
+
+    def _get_movie_index(self, movie_id) -> Union[int, None]:
+        for index, movie in enumerate(self.movies):
+            if movie['id'] == movie_id:
+                return index
+        return None
+
     # TODO: Use a Database
     def _init_movies_list(self):
         self.movies.append({

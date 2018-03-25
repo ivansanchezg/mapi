@@ -26,6 +26,7 @@ def get_movie(movie_id):
 
     return jsonify(MovieSchema().dump(movie))
 
+
 @movie_blueprint.route('', methods=['POST'])
 def add_movie():
     try:
@@ -39,3 +40,21 @@ def add_movie():
         abort(400)
 
     return jsonify(MovieSchema().dump(movie)), 201
+
+
+@movie_blueprint.route('/<int:movie_id>', methods=['PATCH'])
+def update_movie(movie_id):
+    try:
+        data = MovieUpdateSchema().load(request.get_json())
+    except ValidationError:
+        abort(400)
+
+    if not data:
+        abort(400)    
+
+    try:
+        movie = movie_service.update_movie(movie_id, data)
+    except NotFound:
+        abort(404)
+    
+    return jsonify(MovieSchema().dump(movie))
