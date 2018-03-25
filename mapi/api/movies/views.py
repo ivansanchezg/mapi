@@ -58,3 +58,13 @@ def update_movie(movie_id):
         abort(404)
     
     return jsonify(MovieSchema().dump(movie))
+
+
+@movie_blueprint.route('/<int:movie_id>', methods=['DELETE'])
+def delete_movie(movie_id):
+    try:
+        movie = movie_service.delete_movie(movie_id)
+    except NotFound:
+        abort(404)
+
+    return jsonify(MovieSchema().dump(movie))

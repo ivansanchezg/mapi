@@ -37,6 +37,15 @@ class MovieService():
         
         return self.movies[index]
 
+    def delete_movie(self, movie_id) -> Dict[AnyStr, Any]:
+        index = self._get_movie_index(movie_id)
+        if index is None:
+            raise NotFound()
+
+        movie = self.movies[index]
+        del self.movies[index]
+        return movie      
+
     def _get_movie_index(self, movie_id) -> Union[int, None]:
         for index, movie in enumerate(self.movies):
             if movie['id'] == movie_id:
