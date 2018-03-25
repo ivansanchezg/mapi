@@ -6,6 +6,7 @@ class MovieService():
         # TODO: Replace with a Database
         self.movies = []
         self._init_movies_list()
+        self.id_counter = len(self.movies) + 1
 
     def get_movies(self) -> List[Dict[AnyStr, Any]]:
         return self.movies
@@ -15,6 +16,16 @@ class MovieService():
             if movie['id'] == movie_id:
                 return movie
         raise NotFound()
+
+    def add_movie(self, data: Dict[AnyStr, Any]) -> Dict[AnyStr, Any]:
+        for movie in self.movies:
+            if movie['name'] == data['name'] and movie['year'] == data['year']:
+                raise DuplicatedMovie()
+
+        data['id'] = self.id_counter
+        self.id_counter += 1
+        self.movies.append(data)
+        return data
 
     # TODO: Use a Database
     def _init_movies_list(self):

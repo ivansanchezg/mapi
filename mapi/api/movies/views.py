@@ -25,3 +25,17 @@ def get_movie(movie_id):
         abort(404)
 
     return jsonify(MovieSchema().dump(movie))
+
+@movie_blueprint.route('', methods=['POST'])
+def add_movie():
+    try:
+        data = MovieSchema().load(request.get_json())
+    except ValidationError:
+        abort(400)
+
+    try:
+        movie = movie_service.add_movie(data)
+    except DuplicatedMovie:
+        abort(400)
+
+    return jsonify(MovieSchema().dump(movie)), 201
