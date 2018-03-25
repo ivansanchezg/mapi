@@ -1,0 +1,2 @@
+Flask==0.12.2
+marshmallow==3.0.0b8
