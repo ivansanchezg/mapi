@@ -1,2 +1,5 @@
 .vscode*
 *.py[cod]
+mapi/bin/
+mapi/lib/
+mapi/pyvenv.cfg
