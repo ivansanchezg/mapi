@@ -8,11 +8,15 @@ This project was done with sole purpose of learning this technologies.
 
 ### Unix (Linux & MacOs)
 
-1. Install python
+1. Install python3
 
-2. Execute: `pip install -r requirements/common.txt`
+2. Create a virtual environment: `python3 -m venv mapi`
 
-3. In your terminal run:
+3. Activate the virtual environment: `source mapi/bin/activate`
+
+4. Execute: `pip install -r requirements/common.txt`
+
+5. In your terminal run:
 ```
 $ export FLASK_APP="mapi/app.py"
 $ export FLASK_DEBUG=1
@@ -28,9 +32,13 @@ To exit press `Ctrl + C` on your terminal.
 
 1. Install python
 
-2. Execute: `pip install -r .\requirements\common.txt`
+2. Create a virtual environment: `python3 -m venv mapi`
 
-3. In PowerShell run:
+3. Activate the virtual environment: `tutorial-env\Scripts\activate.bat`
+
+4. Execute: `pip install -r .\requirements\common.txt`
+
+5. In PowerShell run:
 ```
 > $env:FLASK_APP = "mapi/app.py"
 > $env:FLASK_DEBUG = 1
